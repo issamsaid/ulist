@@ -1,5 +1,3 @@
-#ifndef _ULIST_PUT_H_
-#define _ULIST_PUT_H_
 ///
 /// @copyright Copyright (c)2016-, Issam SAID <said.issam@gmail.com>
 /// All rights reserved.
@@ -28,27 +26,45 @@
 /// NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 /// SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ///
-/// @file ulist/ulist.h
+/// @file ulist_util.c
 /// @author Issam SAID
-/// @brief Header and implementation of the routine used to add an entry to 
-/// a linked list.
+/// @brief Implement the optional routines to walk through the linked lists.
 ///
-#define DEFINE_ULIST_PUT(TYPE)   \
-    void ulist_put_##TYPE(list_##TYPE##_t **head, TYPE data);
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ulist/util.h>
+#include <ulist/error.h>
+#include <ulist/log.h>
 
-#define IMPLEMENT_ULIST_PUT(TYPE)                               \
-    void ulist_put_##TYPE(list_##TYPE##_t** head, TYPE data) {  \
-        list_##TYPE##_t*     n = *head;                         \
-        list_##TYPE##_t** prev =  head;                         \
-        list_##TYPE##_t* entry =                                \
-            (list_##TYPE##_t*) malloc(sizeof(list_##TYPE##_t)); \
-        entry->data = data;                                     \
-        entry->next = NULL;                                     \
-        while(n != NULL) {                                      \
-            prev = &n->next;                                    \
-            n    = n->next;                                     \
-        }                                                       \
-        *prev = entry;                                          \
-    }
+CPPGUARD_BEGIN();                                                         
 
-#endif  // _ULIST_PUT_H_
+size_t ulist_size(ulist_t** head) { 
+    size_t count = 0;                                 
+    ulist_t* i = *head;                    
+    while(i != NULL) { count++; i=i->next; }                                               
+    return count;                                   
+}                                                   
+
+void ulist_print(ulist_t** head, void (*print_data)(void*)) {
+    ulist_t* i = *head;   
+    if (print_data == NULL) 
+        ULIST_EXIT(ULIST_INVALID_FUNCTOR, "the data printer can not be NULL");                 
+    ULIST_PRINT("Content");    
+    while(i != NULL) {                
+        print_data(i->data);          
+        ULIST_PRINT("---");           
+        ULIST_PRINT("---");           
+        i=i->next;                    
+    }                                 
+    ULIST_PRINT("NULL");              
+}                                     
+
+void ulist_walk(ulist_t** head, void (*function)(void*)){     
+    ulist_t* i = *head;  
+    if (function == NULL) 
+        ULIST_EXIT(ULIST_INVALID_FUNCTOR, "the function can not be NULL");                               
+    while(i != NULL) { function(i->data); i=i->next; }                                               
+}                                                   
+
+CPPGUARD_END();

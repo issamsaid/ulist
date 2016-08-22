@@ -1,5 +1,5 @@
-#ifndef __ULIST_H_
-#define __ULIST_H_
+#ifndef __ULIST_GUARD_H_
+#define __ULIST_GUARD_H_
 ///
 /// @copyright Copyright (c)2016-, Issam SAID <said.issam@gmail.com>
 /// All rights reserved.
@@ -28,13 +28,17 @@
 /// NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 /// SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ///
-/// @file ulist/ulist.h
+/// @file ulist/guard.h
 /// @author Issam SAID
-/// @brief Gather the generic linked lists routines in one file.
+/// @brief Set a header and footer for C++ codes to be able to use ulist.
 ///
-#include <ulist/types.h>
-#include <ulist/core.h>
-#include <ulist/util.h>
-#include <ulist/log.h>
+#ifdef __cplusplus     
+#define CPPGUARD_BEGIN() extern "C" {
+#define CPPGUARD_END()   }
 
-#endif  // __ULIST_H_
+#else
+#define CPPGUARD_BEGIN()
+#define CPPGUARD_END()
+#endif
+
+#endif  // __ULIST_GUARD_H_

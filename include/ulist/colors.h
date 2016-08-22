@@ -1,5 +1,5 @@
-#ifndef __ULIST_H_
-#define __ULIST_H_
+#ifndef __ULIST_COLORS_H_
+#define __ULIST_COLORS_H_
 ///
 /// @copyright Copyright (c)2016-, Issam SAID <said.issam@gmail.com>
 /// All rights reserved.
@@ -28,13 +28,13 @@
 /// NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 /// SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ///
-/// @file ulist/ulist.h
+/// @file ulist/colors.h
 /// @author Issam SAID
-/// @brief Gather the generic linked lists routines in one file.
+/// @brief Macros used to color ulist error, info and debug messages.
 ///
-#include <ulist/types.h>
-#include <ulist/core.h>
-#include <ulist/util.h>
-#include <ulist/log.h>
+#define C_GREEN  "\x1B[32m"
+#define C_PURPLE "\x1B[35m"
+#define C_RED    "\x1B[31m"
+#define C_END    "\x1B[0m"
 
-#endif  // __ULIST_H_
+#endif  // __ULIST_COLORS_H_

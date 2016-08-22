@@ -1,5 +1,3 @@
-#ifndef _ULIST_POP_H_
-#define _ULIST_POP_H_
 ///
 /// @copyright Copyright (c)2016-, Issam SAID <said.issam@gmail.com>
 /// All rights reserved.
@@ -28,29 +26,18 @@
 /// NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 /// SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ///
-/// @file ulist/pop.h
+/// @file test/src/main.cc
 /// @author Issam SAID
-/// @brief Header and implementation of the routine used to remove an entry  
-/// from a linked list.
+/// @brief Main method for unit testing the ulist manipulation routines.
+/// 
+/// @details This file contains the main program used to launch the unit 
+/// testing of the ulist functionalities. It relies on the google testing API.
 ///
-#define DEFINE_ULIST_POP(TYPE)                               \
-    void ulist_pop_##TYPE(ulist_##TYPE##_t **head, TYPE data);
+#include <cstdio>
+#include <string>
+#include "gtest/gtest.h"
 
-#define IMPLEMENT_ULIST_POP(TYPE)                               \
-    void ulist_pop_##TYPE(ulist_##TYPE##_t **head, TYPE data) { \
-        ulist_##TYPE##_t* to_remove;                            \
-        ulist_##TYPE##_t*  n    = *head;                        \
-        ulist_##TYPE##_t** prev =  head;                        \
-        while(n != NULL) {                                      \
-            if (n->data == data) {                              \
-                to_remove = n;                                  \
-                *prev     = n->next;                            \
-            }                                                   \
-            prev = &n->next;                                    \
-            n    = n->next;                                     \
-        }                                                       \
-        free(to_remove);                                        \
-        to_remove = NULL;                                       \
-    }
-
-#endif  // _ULIST_POP_H_
+int main(int argc, char** argv) {
+    ::testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
+}

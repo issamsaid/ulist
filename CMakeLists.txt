@@ -40,11 +40,12 @@ set (CMAKE_INSTALL_PREFIX "${CMAKE_SOURCE_DIR}")
 set (CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 
 ## Configurable options for how we want to build ulist
-option(ulist_debug "Build ulist with the debug mode." OFF)
+option(ulist_verbose "Build ulist with the verbose mode." ON)
+option(ulist_debug   "Build ulist with the debug mode."  OFF)
 
 ## Set the build type (DEFAULT is Release)
 if (NOT CMAKE_BUILD_TYPE)
-   set (CMAKE_BUILD_TYPE Release)
+    set (CMAKE_BUILD_TYPE Release)
 endif ()
 if (ulist_debug)
 	set (CMAKE_BUILD_TYPE Debug)
@@ -72,14 +73,23 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" MATCHES "MSVC")
   	# using Visual Studio C++
 endif()
 
+if (ulist_verbose)
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D__ULIST_VERBOSE")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D__ULIST_VERBOSE")
+endif (ulist_verbose)
+
 ## Skip dependencies between builds and installs
 set(CMAKE_SKIP_INSTALL_ALL_DEPENDENCY TRUE) 
 
-## Build the ulist unit testing suit.
-add_subdirectory(test EXCLUDE_FROM_ALL)
+## Build the ulist library
+add_subdirectory(src)
 
-## Build the ulist examples.
-add_subdirectory(examples EXCLUDE_FROM_ALL)
+## Build the ulist examples
+add_subdirectory(examples)
 
-## Build the ulist documentation.
+## Build the ulist testing suit
+enable_testing()
+add_subdirectory(test)
+
+## Build the ulist documentation
 add_subdirectory(doc EXCLUDE_FROM_ALL)

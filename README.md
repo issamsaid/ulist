@@ -1,7 +1,7 @@
 # ulist
 [![Build Status](https://travis-ci.org/issamsaid/ulist.svg?branch=master)](https://travis-ci.org/issamsaid/ulist)
 
-<b>ulist</b> stands for universal linked list, which is a generic-typed C/C+
+<b>ulist</b> stands for universal linked list, which is a generic-typed C/C++
 linked list. 
 
 # Getting started

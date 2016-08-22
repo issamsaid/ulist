@@ -1,4 +1,5 @@
-#ifndef _ULIST_TYPES_H_
+#ifndef __ULIST_TYPES_H_
+#define __ULIST_TYPES_H_
 ///
 /// @copyright Copyright (c)2016-, Issam SAID <said.issam@gmail.com>
 /// All rights reserved.
@@ -29,15 +30,12 @@
 ///
 /// @file ulist/types.h
 /// @author Issam SAID
-/// @brief Generic-typed linked list.
+/// @brief Define the data structure of the generic linked list.
 ///
-typedef char* string;
 
-#define DEFINE_ULIST_TYPES(type)                        \
-    typedef ulist_##type##_t struct __ulist_##type##_t; \
-    struct __ulist_##type##_t {                         \
-        struct __list_##type##_t *next;                 \
-        type data;                                      \
-    };
+typedef struct __ulist_t {  
+    struct __ulist_t *next; 
+    void *data;             
+} ulist_t;
 
-#endif  // _ULIST_TYPES_H_
+#endif  // __ULIST_TYPES_H_

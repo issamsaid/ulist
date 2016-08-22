@@ -1,5 +1,5 @@
-#ifndef _ULIST_UTIL_H_
-#define _ULIST_UTIL_H_
+#ifndef __ULIST_UTIL_H_
+#define __ULIST_UTIL_H_
 ///
 /// @copyright Copyright (c)2016-, Issam SAID <said.issam@gmail.com>
 /// All rights reserved.
@@ -30,20 +30,21 @@
 ///
 /// @file ulist/util.h
 /// @author Issam SAID
-/// @brief Utilities to walk through the values of a linked list.
+/// @brief Headers and implementations of utilities to manipulate the list
+/// data by walking through the linked list.
 ///
-#define DEFINE_ULIST_SIZE(TYPE)                     \
-    size_t ulist_size_##TYPE(ulist_##TYPE##_t** head);
+#include <stdio.h>
+#include <ulist/types.h>
+#include <ulist/guard.h>
 
-#define IMPLEMENT_ULIST_SIZE(TYPE)                     \
-    size_t list_size_##TYPE(ulist_##TYPE##_t** head) { \
-        size_t count = 0;                              \
-        ulist_##TYPE##_t* n = *head;                   \
-        while(n != NULL) {                             \
-            count++;                                   \
-            n=n->next;                                 \
-        }                                              \
-        return count;                                  \
-    }
+CPPGUARD_BEGIN();                              
 
-#endif  // _ULIST_UTIL_H_
+size_t ulist_size(ulist_t** head);
+
+void ulist_print(ulist_t** head, void (*print_data)(void*));
+
+void ulist_walk(ulist_t** head, void (*function)(void*));
+
+CPPGUARD_END();
+
+#endif  // __ULIST_UTIL_H_

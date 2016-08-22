@@ -1,5 +1,5 @@
-#ifndef _ULIST_FIND_H_
-#define _ULIST_FIND_H_
+#ifndef __ULIST_LOG_H_
+#define __ULIST_LOG_H_
 ///
 /// @copyright Copyright (c)2016-, Issam SAID <said.issam@gmail.com>
 /// All rights reserved.
@@ -28,21 +28,26 @@
 /// NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 /// SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ///
-/// @file ulist/find.h
+/// @file ulist/log.h
 /// @author Issam SAID
-/// @brief Gather the generic linked lists manipulation routines in one file.
+/// @brief Macros to format information or debug messages when using ulist.
 ///
-#define DEFINE_FIND_ENTRY(TYPE)                                            \
-    ulist_##TYPE##_t* ulist_find_##TYPE(ulist_##TYPE##_t **head, TYPE data);
+#include <stdio.h>
+#include <ulist/colors.h>
 
-#define IMPLEMENT_FIND_ENTRY(TYPE)                                            \
-    ulist_##TYPE##_t* ulist_find_##TYPE(ulist_##TYPE##_t **head, TYPE data) { \
-        ulist_##TYPE##_t *n = *head;                                          \
-        while(n != NULL) {                                                    \
-            if (n->data == data) break;                                       \
-            n=n->next;                                                        \
-        }                                                                     \
-        return n;                                                             \
-    }
+#ifdef  __ULIST_DEBUG
+#define __ULIST_VERBOSE
+#define ULIST_DEBUG(fmt,...)                                       \
+fprintf(stdout, C_PURPLE"[ULIST DBG]: "fmt".\n"C_END, ##__VA_ARGS__)
+#else 
+#define ULIST_DEBUG(fmt,...) 
+#endif  // __ULIST_DEBUG
 
-#endif  // _ULIST_FIND_H_
+#ifdef __ULIST_VERBOSE                             
+#define ULIST_PRINT(fmt,...)                                      \
+fprintf(stdout, C_GREEN"[ULIST MSG]: "fmt".\n"C_END, ##__VA_ARGS__)
+#else 
+#define ULIST_PRINT(fmt,...) 
+#endif  // __ULIST_VERBOSE 
+
+#endif  // __ULIST_LOG_H_
