@@ -75,5 +75,5 @@ set_target_properties(libgmock PROPERTIES
 include_directories("${source_dir}/googletest/include"
                     "${source_dir}/googlemock/include")
 
-## Build the hiCL C/C++ unit tests.
+## Build the ulist C/C++ unit tests.
 add_subdirectory(src)
