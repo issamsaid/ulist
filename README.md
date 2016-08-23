@@ -11,7 +11,7 @@ However, **ulist** can only be used to wrap C/C++ structures or defined
 types (since usually linked lists are used to manipulate complex user-defined 
 data structures), thus allocating and releasing the data to be wrapped into 
 nodes are **assumed** to be issued outside the library calls. In other words
-it is the responsibility of user to allocate and free the memory required
+it is the responsibility of the user to allocate and free the memory required
 for each data structure. If you are willing to use linked lists to wrap 
 intrinsic types, it is recommended that you use arrays instead.
 
