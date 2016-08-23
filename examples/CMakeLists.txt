@@ -33,5 +33,5 @@
 project (ulist_examples)
 cmake_minimum_required (VERSION 2.8)
 
-## Build the ulist C/C++ examples.
+## Build the ulist C/C++ examples
 add_subdirectory(src)

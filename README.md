@@ -1,12 +1,22 @@
 # ulist
 [![Build Status](https://travis-ci.org/issamsaid/ulist.svg?branch=master)](https://travis-ci.org/issamsaid/ulist)
 
-<b>ulist</b> stands for universal linked list, which is a generic-typed C/C++
-linked list. 
+**ulist** stands for **universal linked list**, which is a generic C/C++
+library that can be used to wrap up your data structures into 
+[linked lists](https://en.wikipedia.org/wiki/Linked_list) very easily. 
+It provides a set of efficient functionalities to build and 
+manipulate linked lists independently on the type of data that is being 
+used. However, **ulist** can only be used to wrap C/C++ structures or defined 
+types (since usually linked lists are used to manipulate complex user-defined 
+data structure), thus allocating and releasing the data to be wrapped into 
+nodes are **assumed** to be issued outside the library calls. In other words
+it is the responsibility of user to allocate and free the memory required
+for each data structure. If you are willing to use linked lists to wrap 
+intrinsic types, it is recommended that you use arrays instead.
 
 # Getting started
 The following section is a step by step guide that will take you from fetching
-the source code from the repository branches to running your <b>ulist</b> first 
+the source code from the repository branches to running your **ulist** first 
 examples on your machine.
 
 ## Branches and cloning
@@ -21,10 +31,8 @@ first release is tagged 1.0 on the master branch).
 Cloning the master branch and checking out the latest release can
 be done as follows:
 ```
-git clone --recursive -b master https://github.com/issamsaid/ulist.git
+git clone  https://github.com/issamsaid/ulist.git
 ```
-Note that the `--recursive` option is added to include all the submodules used
-by ulist to the cloned repository. 
 If you wish to clone a specific release (here we use the 1.0 release as
 an example) you may add:
 ```
@@ -43,17 +51,14 @@ On the other hand, the **develop** branch contains the latest builds and is
 intended to be used by the developers who are willing to contribute or improve 
 the library. To get started, you can clone this branch as follows:
 ```
-git clone --recursive -b develop https://github.com/issamsaid/ulist.git
+git clone -b develop https://github.com/issamsaid/ulist.git
 ```
 
 ## Setting up and building
 The <b>ulist</b> project has multiple components, each in a subdirectory of the
 root directory (ulist). The [src](https://github.com/issamsaid/ulist/tree/master/src)
-subdirectory is the C/C++ interface, the 
-[fortran_interface](https://github.com/issamsaid/ulist/tree/master/fortran_interface)
-subdirectory is the Fortran interface, the 
-[test](https://github.com/issamsaid/ulist/tree/master/test) subdirectory contains
- the unit tests of the library, 
+subdirectory is the C/C++ file necessary to build the static library 
+`libulist.a`, the [test](https://github.com/issamsaid/ulist/tree/master/test) subdirectory contains the unit tests of the library, 
  the [doc](https://github.com/issamsaid/ulist/tree/master/doc) subdirectory is 
  where the documentation of the library is to be generated,
  and the [examples](https://github.com/issamsaid/ulist/tree/master/examples) includes a set of examples of how to use the library.
@@ -69,48 +74,19 @@ popd
 The current version of the <b>ulist</b> library had been tested on various Linux 
 workstations with the GNU and Intel compilers. Nevertheless, if you face issues 
 with other compilers you are kindly invited to report them.
-Note that if you are using Cray compilers you have to specify where the 
-Fortran compiler is wrapped. For example if you are using `ftn` you have to add:
-```
-pushd ulist
-mkdir build
-pushd build
-cmake -DCMAKE_Fortran_COMPILER=ftn -G"Unix Makefiles" ../
-popd
-```
-To build the library you can run the default target which compiles the C/C++ 
-interface only:
+To build the library you can run the default target:
 ```
 pushd build
-make ulist
+make 
 popd 
 ```
 This Makefile target will build the static library `libulist.a` from the C/C++ 
 source files in the [src](https://github.com/issamsaid/ulist/tree/master/src)
-subdirectory. 
-Besides, if you would like to build the Fortran interface additionally, 
-you can do so as follows:
-```
-pushd build
-make ulist_fortran
-popd
-```
-This target will build another static library `libulist_fortran.a` from the
-Fortran source files present in the 
-[fortran_interface](https://github.com/issamsaid/ulist/tree/master/fortran_interface)
-subdirectory.
+subdirectory, the unit tests and the examples. 
 In order to install the libraries on the `lib` subdirectory you can run:
 ```
 pushd build
 make install
-make install -C fortran_interface // This is needed due to a cmake bug
-popd
-```
-You can also classically run the following in order to build only the 
-C/C++ interface and install it:
-```
-pushd build
-make all install
 popd
 ```
 
@@ -127,10 +103,7 @@ to use <b>ulist</b> to write your own codes for scientific purposes.
 
 ## Using the library
 In order to use the <b>ulist</b> C/C++ link your code against libulist.a 
-(by adding `-lulist` to your linker options), 
-however if your code is based on Fortran the 
-latter should linked against both the C/C++ library and the Fortran interface (
-with the help of the options `-lulist_fortran -lulist`).<br/>
+(by adding `-lulist` to your linker options).<br/>
 
 ## Testing
 If you want to work with the latest build, you are invited to fetch from the 
@@ -138,43 +111,23 @@ If you want to work with the latest build, you are invited to fetch from the
 tests (on top of the [googletest](https://github.com/google/googletest/) 
 Framework) to validate the new features. You can check the unit testing 
 directory [here](https://github.com/issamsaid/ulist/tree/master/test).
-The testing framework is used to thoroughly test <b>ulist</b> in C/C++ 
-([test/src](https://github.com/issamsaid/ulist/tree/master/test/src)) and 
-Fortran ([test/fortran](https://github.com/issamsaid/ulist/tree/master/test/fortran_interface)). 
-```
-pushd build
-make build_tests
-make install -C test // This is needed due to a cmake bug
-popd
-```
-Alternatively `make ulist_test && make install -C test/src` will only build and 
-install the test suit for the C/C++ interface, and `make ulist_test_fortran && make install -C test/fortran_interface` will build and install the unit tests for the
-Fortran interface.
+The testing framework is used to thoroughly test <b>ulist</b> in C/C++: 
 Tests should be written for any new code, and changes should be verified to not 
 break existing tests before they are submitted for review. 
 To perform the tests (which are automatically built when you compile
 the library) you can run:
 ```
-pushd test
-./bin/ulist_test         // for C/C++
-./bin/ulist_test_fortran // for Fortran
+pushd build
+make test
 popd
 ```
 
 ## Examples
 The library comes with an 
 [examples](https://github.com/issamsaid/ulist/tree/master/examples)
-subdirectory which contains some C/C++ and Fortran samples. Those can be built
-and installed as follows:
-```
-pushd build
-make examples
-make install -C examples // This is needed due to a cmake bug
-pupd
-```
-Alternatively `make c_examples && make install -C examples/src` will only build and 
-install the C/C++ examples, and `make fortran_examples && make install -C examples/fortran_interface` will build and install the Fortran examples.
-The examples binaries can be browsed in the `test/bin` subdirectory.
+subdirectory which contains some C/C++ samples. Those are built
+and installed when you run the default target.
+The examples binaries can be browsed in the `examples/bin` subdirectory.
 
 ## Continuous integration
 I use [Travis CI](https://travis-ci.org/issamsaid/ulist) for the continuous 
