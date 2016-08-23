@@ -1,14 +1,15 @@
 # ulist
 [![Build Status](https://travis-ci.org/issamsaid/ulist.svg?branch=master)](https://travis-ci.org/issamsaid/ulist)
 
-**ulist** stands for **universal linked list**, which is a generic C/C++
+**ulist** stands for **universal linked list**, which is a C/C++
 library that can be used to wrap up your data structures into 
 [linked lists](https://en.wikipedia.org/wiki/Linked_list) very easily. 
 It provides a set of efficient functionalities to build and 
 manipulate linked lists independently on the type of data that is being 
-used. However, **ulist** can only be used to wrap C/C++ structures or defined 
+used (a node in the list is simply a `void *`). 
+However, **ulist** can only be used to wrap C/C++ structures or defined 
 types (since usually linked lists are used to manipulate complex user-defined 
-data structure), thus allocating and releasing the data to be wrapped into 
+data structures), thus allocating and releasing the data to be wrapped into 
 nodes are **assumed** to be issued outside the library calls. In other words
 it is the responsibility of user to allocate and free the memory required
 for each data structure. If you are willing to use linked lists to wrap 
@@ -41,7 +42,7 @@ git checkout tags/1.0
 popd
 ``` 
 The following table summarizes the different details about all the 
-releases of the <b>ulist</b> library:</br>
+releases of the **ulist** library:</br>
 
 Release number (tag)  | Date         | Description                                    
 --------------------- | ------------ | -----------------------------------------------
@@ -55,7 +56,7 @@ git clone -b develop https://github.com/issamsaid/ulist.git
 ```
 
 ## Setting up and building
-The <b>ulist</b> project has multiple components, each in a subdirectory of the
+The **ulist** project has multiple components, each in a subdirectory of the
 root directory (ulist). The [src](https://github.com/issamsaid/ulist/tree/master/src)
 subdirectory is the C/C++ file necessary to build the static library 
 `libulist.a`, the [test](https://github.com/issamsaid/ulist/tree/master/test) subdirectory contains the unit tests of the library, 
