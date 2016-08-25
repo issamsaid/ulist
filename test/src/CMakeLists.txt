@@ -46,9 +46,7 @@ target_link_libraries (ulist_test LINK_PUBLIC libgtest)
 target_link_libraries (ulist_test LINK_PUBLIC ulist)
 
 ## Install the binary into test/bin
-install(TARGETS ulist_test 
-        DESTINATION test/bin 
-        OPTIONAL)
+install(TARGETS ulist_test DESTINATION test/bin OPTIONAL)
 
 ## Add the test to the make test target
 add_test(NAME ulist_test COMMAND ${EXECUTABLE_OUTPUT_PATH}/ulist_test)

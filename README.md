@@ -83,14 +83,19 @@ popd
 ```
 This Makefile target will build the static library `libulist.a` from the C/C++ 
 source files in the [src](https://github.com/issamsaid/ulist/tree/master/src)
-subdirectory, the unit tests and the examples. 
+subdirectory, and the examples. 
 In order to install the libraries on the `lib` subdirectory you can run:
 ```
 pushd build
 make install
 popd
 ```
-
+If you wish to build the unit tests you may add:
+```
+pushd build
+make ulist_test
+popd
+```
 ## Generating the documentation
 The documentation of the library can be generated, in the [doc](https://github.com/issamsaid/ulist/tree/master/doc) subdirectory,
 with the help of [doxygen](http://www.stack.nl/~dimitri/doxygen/) by simply running:
