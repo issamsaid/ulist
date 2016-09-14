@@ -85,11 +85,11 @@ set(CMAKE_SKIP_INSTALL_ALL_DEPENDENCY TRUE)
 add_subdirectory(src)
 
 ## Build the ulist examples
-add_subdirectory(examples)
+add_subdirectory(examples EXCLUDE_FROM_ALL)
 
 ## Build the ulist testing suit
 enable_testing()
-add_subdirectory(test)
+add_subdirectory(test EXCLUDE_FROM_ALL)
 
 ## Build the ulist documentation
 add_subdirectory(doc EXCLUDE_FROM_ALL)
