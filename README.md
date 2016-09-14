@@ -83,8 +83,13 @@ popd
 ```
 This Makefile target will build the static library `libulist.a` from the C/C++ 
 source files in the [src](https://github.com/issamsaid/ulist/tree/master/src)
+<<<<<<< HEAD
 subdirectory, and the examples. 
 In order to install the libraries on the `lib` subdirectory you can run:
+=======
+subdirectory, the unit tests and the examples. 
+In order to install the library on the `lib` subdirectory you can run:
+>>>>>>> develop
 ```
 pushd build
 make install
@@ -120,10 +125,11 @@ directory [here](https://github.com/issamsaid/ulist/tree/master/test).
 The testing framework is used to thoroughly test <b>ulist</b> in C/C++: 
 Tests should be written for any new code, and changes should be verified to not 
 break existing tests before they are submitted for review. 
-To perform the tests (which are automatically built when you compile
-the library) you can run:
+To build and perform the tests you can run:
 ```
 pushd build
+make ulist_test
+make install -C test/
 make test
 popd
 ```
@@ -132,7 +138,13 @@ popd
 The library comes with an 
 [examples](https://github.com/issamsaid/ulist/tree/master/examples)
 subdirectory which contains some C/C++ samples. Those are built
-and installed when you run the default target.
+and installed as follows:
+```
+pushd build
+make ulist_examples
+make install -C examples/
+popd
+```
 The examples binaries can be browsed in the `examples/bin` subdirectory.
 
 ## Continuous integration
