@@ -87,13 +87,10 @@ add_subdirectory(src)
 ## Build the ulist examples
 add_subdirectory(examples EXCLUDE_FROM_ALL)
 
-<<<<<<< HEAD
-=======
 ## Build the ulist testing suit
 enable_testing()
 add_subdirectory(test EXCLUDE_FROM_ALL)
 
->>>>>>> develop
 ## Build the ulist documentation
 add_subdirectory(doc EXCLUDE_FROM_ALL)
 
