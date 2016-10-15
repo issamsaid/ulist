@@ -61,13 +61,8 @@ set_target_properties(libgtest PROPERTIES
     "IMPORTED_LINK_INTERFACE_LIBRARIES" "${CMAKE_THREAD_LIBS_INIT}"
 )
 
-<<<<<<< HEAD
-## INTERFACE_INCLUDE_DIRECTORIES
-include_directories("${source_dir}/googletest/include")
-=======
 ## Include the GoogleTest
 include_directories("${SOURCE_DIR}/googletest/include")
->>>>>>> develop
 
 ## Build the ulist C/C++ unit tests.
 add_subdirectory(src)
