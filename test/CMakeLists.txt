@@ -3,7 +3,7 @@
 ## All rights reserved.
 ##
 ## Redistribution and use in source and binary forms, with or without
-## modification, are permetted provided that the following conditions
+## modification, are permitted provided that the following conditions
 ## are met:
 ##
 ## 1. Redistributions of source code must retain the above copyright
@@ -11,7 +11,7 @@
 ## 2. Redistributions in binary form must reproduce the above copyright
 ##    notice, this list of conditions and the following disclaimer in the
 ##    documentation and/or other materials provided with the distribution.
-## 3. Neither the name of the UPMC nor the names of its contributors
+## 3. Neither the name of the copyright holder nor the names of its contributors
 ##    may be used to endorse or promote products derived from this software
 ##    without specific prior written permission.
 ##
@@ -49,7 +49,7 @@ ExternalProject_Add(
 )
 
 ## Get GTest source and binary directories from CMake project
-ExternalProject_Get_Property(gtest source_dir binary_dir)
+ExternalProject_Get_Property(gtest SOURCE_DIR BINARY_DIR)
 
 ## Create a libgtest target to be used as a dependency by test programs
 add_library(libgtest IMPORTED STATIC GLOBAL)
@@ -57,12 +57,17 @@ add_dependencies(libgtest gtest)
 
 ## Set libgtest properties
 set_target_properties(libgtest PROPERTIES
-    "IMPORTED_LOCATION" "${binary_dir}/googlemock/gtest/libgtest.a"
+    "IMPORTED_LOCATION" "${BINARY_DIR}/googlemock/gtest/libgtest.a"
     "IMPORTED_LINK_INTERFACE_LIBRARIES" "${CMAKE_THREAD_LIBS_INIT}"
 )
 
+<<<<<<< HEAD
 ## INTERFACE_INCLUDE_DIRECTORIES
 include_directories("${source_dir}/googletest/include")
+=======
+## Include the GoogleTest
+include_directories("${SOURCE_DIR}/googletest/include")
+>>>>>>> develop
 
 ## Build the ulist C/C++ unit tests.
 add_subdirectory(src)
